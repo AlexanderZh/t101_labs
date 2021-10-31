@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from time import time
 
 #generates x and y numpy arrays for 
 # y = a*x + b + a * noise
@@ -28,7 +29,10 @@ def linear_regression_numpy(filename):
     print(np.shape(x))
     print(np.shape(y))
     #our model
+    time_start = time()
     model = np.polyfit(np.transpose(x)[0], np.transpose(y)[0], 1)
+    time_end = time()
+    print(f"polyfit in {time_end - time_start} seconds")
     # our hypothesis for give x
     h =  model[0]*x + model[1]
 
@@ -42,6 +46,7 @@ def linear_regression_numpy(filename):
     plt.show()
     
 
+# Ex1: make the same with polynoms
 
 #generates x and y numpy arrays for 
 # y = a_n*X^n + ... + a2*x^2 + a1*x + a0 + noise
@@ -61,19 +66,15 @@ def generate_poly(a, n, noise, filename, size = 100):
     print(np.shape(x))
     data = np.hstack((x,y))
     np.savetxt('generated_poly.csv',data,delimiter=',')
-    # now let's read it back
-    with open('generated_poly.csv', 'r') as f:
-        data = np.loadtxt(f,delimiter=',')
-    #split to initial arrays
-    x,y = np.hsplit(data,2)
-    #and check if it's ok
-    plt.title(f"Polynomial regression task (n={n})")
-    plt.xlabel("X")
-    plt.ylabel("Y")
-    plt.plot(x, y, "b.", label = 'experiment')
-    plt.legend()
-    plt.show()
-    return(x,y)
+
+
+def polynomial_regression_numpy(filename):
+    print("Ex1: your code here")
+    time_start = time()
+    print("Ex1: your code here")
+    time_end = time()
+    print(f"polyfit in {time_end - time_start} seconds")
+    
 
 # find minimum of function J(theta) using gradient descent
 # alpha - speed of descend
@@ -96,10 +97,12 @@ def minimize(J, theta, paha):
 
 
 if __name__ == "__main__":
-    generate_linear(1,-3,0.5,'linear',100)
-    linear_regression_numpy("linear")
-    
-    print('Generating polynomial data y = a*x^2 + bx + c')
-    (x,y) = generate_poly([1,2,3],2,0.5)
-    
+    generate_linear(1,-3,0.5,'linear.csv',100)
+    linear_regression_numpy("linear.csv")
+
+    #ex1. polynomial with numpy
+    generate_poly([1,2,3],2,0.5)
+    polynomial_regression_numpy("polynomial.csv")
+
+        
     
