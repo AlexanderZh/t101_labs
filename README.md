@@ -1,4 +1,4 @@
-# Here's repo of stident tasks for the basic ML course
+# Here's repo of student tasks for the basic ML course
 
 ##lab-1. Knowledge-based system
 
